@@ -13,8 +13,7 @@ public class BottomCollider : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
-        Enemy enemy = collision.GetComponent<Enemy>();
+         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy != null && player!= null)
         {
             player.ReduceLives();

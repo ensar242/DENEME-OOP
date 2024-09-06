@@ -3,18 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PA.WeaponSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour , IHittable
 {
     public float speed = 2;
 
-    public float shootingDelay = 0.2f;
-    public bool shootingDelayed;
-
-    public GameObject projectile;
     public Transform playerShip;
-
-    public AudioSource gunAudio;
 
     public ScreenBounds screenBounds;
 
@@ -37,6 +32,8 @@ public class Player : MonoBehaviour
     public InGameMenu loseScreen;
     public Button menuButton;
 
+    [SerializeField] private Weapon weapon;
+
 
     private void Awake()
     {
@@ -58,13 +55,19 @@ public class Player : MonoBehaviour
         //shooting
         if (Input.GetKey(KeyCode.Space))
         {
-            if(shootingDelayed == false)
+
+            /*if(shootingDelayed == false)
             {
                 shootingDelayed = true;
                 gunAudio.Play();
                 GameObject p = Instantiate(projectile, transform.position, Quaternion.identity);
                 StartCoroutine(DelayShooting());
-            }
+            }*/
+            weapon.PerformAttack();
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            weapon.SwapWeapon();
         }
     }
 
@@ -78,11 +81,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator DelayShooting()
-    {
-        yield return new WaitForSeconds(shootingDelay);
-        shootingDelayed = false;
-    }
+    
 
     public void ReduceLives()
     {
@@ -114,14 +113,23 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<ScreenBounds>() || collision.GetComponent<BottomCollider>())
-            return;
 
-        //Debug.Log(collision.name);
-        
-        health--;
+    private void GetHitFeedback()
+    {
+        hitSource.PlayOneShot(hitClip);
+    }
+
+    private void Death()
+    {
+        isAlive = false;
+        hitSource.PlayOneShot(deathClip);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
+        StartCoroutine(DestroyCoroutine());
+    }
+
+    private void UpdateUI()
+    {
         for (int i = 0; i < lives.Count; i++)
         {
             if (i >= health)
@@ -132,19 +140,7 @@ public class Player : MonoBehaviour
             {
                 lives[i].color = Color.white;
             }
-            
-        }
-        if (health <= 0)
-        {
-            isAlive = false;
-            hitSource.PlayOneShot(deathClip);
-            GetComponent<Collider2D>().enabled = false;
-            GetComponentInChildren<SpriteRenderer>().enabled = false;
-            StartCoroutine(DestroyCoroutine());
-        } 
-        else
-        {
-            hitSource.PlayOneShot(hitClip);
+
         }
     }
 
@@ -157,4 +153,17 @@ public class Player : MonoBehaviour
         menuButton.interactable = false;
     }
 
+    public void GetHit(int damageValue, GameObject sender)
+    {
+       health -= damageValue;
+        UpdateUI();
+        if (health <= 0)
+        {
+            Death();
+        }
+        else
+        {
+            GetHitFeedback();
+        }
+    }
 }
