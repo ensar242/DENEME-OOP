@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PA.HealthSystem;
 
-public class Enemy : MonoBehaviour, IHittable
+public class Enemy : MonoBehaviour 
 {
     public Player player;
-    public int health = 3;
+    [SerializeField]
+    private int initialHealthValue = 3;
 
     public GameObject projectile;
     public float shootingDelay;
@@ -25,17 +27,20 @@ public class Enemy : MonoBehaviour, IHittable
 
     public GameObject explosionFX, hitParticle;
 
+    [SerializeField] private Health health;
+
     private void Awake()
     {
+        health = GetComponent<Health>(); ;
         player = FindObjectOfType<Player>();
         rb2d = GetComponent<Rigidbody2D>();
         speed += UnityEngine.Random.Range(0, speedVariation);
     }
 
-    //private void Start()
-    //{
-    //    rb2d.velocity = Vector3.down * speed;
-    //}
+    private void Start()
+    {
+        health.InitializeHealth(initialHealthValue);
+    }
 
     private void Update()
     {
@@ -101,28 +106,15 @@ public class Enemy : MonoBehaviour, IHittable
         enemySpawner.EnemyKilled(this, false);
         Destroy(gameObject);
     }
+  
 
-    public void GetHit(int damageValue, GameObject sender)
-    {
-        health--;
-
-        if (health <= 0)
-        {
-            Death();
-        }
-        else
-        {
-            GetHitFeedBack();
-        }
-    }
-
-    private void GetHitFeedBack()
+    public void GetHitFeedBack()
     {
         hitSource.PlayOneShot(hitClip);
         Instantiate(hitParticle, transform.position, Quaternion.identity);
     }
 
-    private void Death()
+    public void Death()
     {
         enemySpawner.EnemyKilled(this, true);
         GetComponent<Collider2D>().enabled = false;

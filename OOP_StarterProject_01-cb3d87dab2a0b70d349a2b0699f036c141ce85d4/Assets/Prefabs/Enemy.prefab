@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5574738824532766061}
   - component: {fileID: 6213595567998338359}
   - component: {fileID: 3708550910602834571}
+  - component: {fileID: -5249577867650708545}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  health: 3
+  initialHealthValue: 3
   projectile: {fileID: 7346062771074515281, guid: 43382fb60acb52f44a058896f62e5259, type: 3}
   shootingDelay: 2
   isShooting: 0
@@ -159,6 +160,7 @@ MonoBehaviour:
   hitSource: {fileID: 3708550910602834571}
   explosionFX: {fileID: 9208622239700334340, guid: dc4c8094b969f5848818364943175b74, type: 3}
   hitParticle: {fileID: 7391086921944597174, guid: 22d65f673d8543548b9ddc5d93f4424d, type: 3}
+  health: {fileID: 0}
 --- !u!82 &3708550910602834571
 AudioSource:
   m_ObjectHideFlags: 0
@@ -255,3 +257,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5249577867650708545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213595567998338355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98eb421f6c30ff84692cb088da8891af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 3
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6213595567998338359}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6213595567998338359}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: GetHitFeedBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
