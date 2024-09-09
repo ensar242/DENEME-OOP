@@ -2,48 +2,51 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using TMPro;// TextMesh Pro'yu kullanmak için gerekli
 using UnityEngine.UI;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour   
 {
-    public Enemy enemy;
     
-    public float timeMin = 0.1f, timeMax = 0.3f;
-    public int maxEnemies = 3;
+    public Enemy enemy;// spawn edilecek düþman türünün belirlenmesi
+    
+    public float timeMin = 0.1f, timeMax = 0.3f;//düþmanlarýn çýkýþ süreleri arasýndaki rastgele aralýk 
+    public int maxEnemies = 3;// her dalgada kaç düþman spawn edilecegini belirtiyor.
 
-    public BoxCollider2D boxCollider;
+    public BoxCollider2D boxCollider;// düþmanlarýn nerede spawn edileceðini belirten alan 
 
-    public float startDelay = 1;
-    public int waveCount = 5;
-    public int currentWave = 0;
+    public float startDelay = 1;//ilk dalganýn baþlamasý için geçen gecikme süresi
+    public int waveCount = 5;// kaç dalga olacagýný belirler
+    public int currentWave = 0;//þu anda kaçýncý dalgada oldugunu tutar(buradaki degeri kullanarak bossun en son gelmesi gerektigi zamaný bulabiliriz)
 
-    List<GameObject> currentEnemies = new List<GameObject>();
+    List<GameObject> currentEnemies = new List<GameObject>();// þu anda var olan düþmanlarýn listesi 
 
     [SerializeField]
-    private TMP_Text scoreText;
+    private TMP_Text scoreText;//UI'da skor bilgisini gösterecek TextMesh Pro bileþeni
     int score;
 
-    public InGameMenu winScreen;
-    public Button menuButton;
+    public InGameMenu winScreen;// oyuncu kazandýgýnda gösterilecek kazanma ekraný 
+    public Button menuButton;// oyun kazandýgýnda devre dýþý býrakýlacak menü butonu
 
-    ScoreSystem scoreSystem;
+    ScoreSystem scoreSystem;// skor sistemini yöneten bileþen
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreSystem = FindObjectOfType<ScoreSystem>();
-        score = scoreSystem.currentScore;
-        StartCoroutine(SpawnWaveWithDelay(startDelay));
+        scoreSystem = FindObjectOfType<ScoreSystem>();// sahnedeki skor sistemini bulur
+        score = scoreSystem.currentScore;// skoru skor sisteminden alýr
+        StartCoroutine(SpawnWaveWithDelay(startDelay));//ilk dalgayý baþlatýr.
     }
 
+    // belirli bir gecikmeden sonra dalgayý baþlatmak için bir coroutine
     private IEnumerator SpawnWaveWithDelay(float startDelay)
     {
         currentWave++;
-        yield return new WaitForSeconds(startDelay);
-        float minX = boxCollider.bounds.min.x;
-        float maxX = boxCollider.bounds.max.x;
+        yield return new WaitForSeconds(startDelay);// belirtilen gecikme kadar bekler
+        float minX = boxCollider.bounds.min.x;// spawn alanýnýn sol sýnýrý
+        float maxX = boxCollider.bounds.max.x;//spawn alanýnýn sað sýnýrý
         
+        // maksimum düþman sayýsý kadar düþman spawn eder 
         for (int i = 0; i < maxEnemies; i++)
         {
             Vector3 spawnPoint = new Vector3(UnityEngine.Random.Range(minX, maxX), transform.position.y, 0);

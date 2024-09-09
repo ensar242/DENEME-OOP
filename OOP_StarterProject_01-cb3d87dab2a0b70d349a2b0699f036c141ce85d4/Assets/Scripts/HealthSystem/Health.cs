@@ -11,7 +11,7 @@ namespace PA.HealthSystem
         public int CurrentHealth { get; private set; }
 
         public UnityEvent OnDeath, OnHit;
-
+         
         public void GetHit(int damageValue, GameObject sender)
         {
             CurrentHealth -= damageValue;
@@ -30,7 +30,7 @@ namespace PA.HealthSystem
         {
             if (startingHealth < 0)
                 startingHealth = 0;
-            CurrentHealth = startingHealth;
+            this.CurrentHealth = startingHealth;
         }
     }
 }

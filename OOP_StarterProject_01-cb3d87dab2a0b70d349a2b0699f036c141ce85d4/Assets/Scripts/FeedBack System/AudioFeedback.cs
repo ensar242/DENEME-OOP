@@ -23,7 +23,7 @@ namespace PA.FeedbackSystem
         private IEnumerator DestroyAfterFinishedPlaying()
         {
             yield return new WaitForSeconds(audioclip.length);
-            Destroy(gameObject); 
+            Destroy(gameObject);  
 
         }
     }
