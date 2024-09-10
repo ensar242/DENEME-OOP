@@ -14,6 +14,10 @@ namespace PA.HealthSystem
          
         public void GetHit(int damageValue, GameObject sender)
         {
+            if (GetComponent<Boss>())
+            {
+                Debug.Log("can:" + CurrentHealth);
+            }
             CurrentHealth -= damageValue;
 
             if (CurrentHealth <= 0)
@@ -31,6 +35,7 @@ namespace PA.HealthSystem
             if (startingHealth < 0)
                 startingHealth = 0;
             this.CurrentHealth = startingHealth;
+
         }
     }
 }

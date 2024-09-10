@@ -14,14 +14,14 @@ GameObject:
   - component: {fileID: -5574738824532766061}
   - component: {fileID: 3708550910602834571}
   - component: {fileID: -5249577867650708545}
-  - component: {fileID: 6213595567998338359}
+  - component: {fileID: 5833717129145593152}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6213595567998338352
 Transform:
   m_ObjectHideFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213595567998338355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1635, y: 4.8, z: 0}
-  m_LocalScale: {x: 0.731381, y: 0.82230884, z: 0.5307692}
+  m_LocalPosition: {x: 3.5124, y: 7.6779, z: 0}
+  m_LocalScale: {x: 4.1567755, y: 4.5274878, z: 0.5307692}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3368266197542423642}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e20f2d8cb1002714797532a952248b61, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f764b84501b1caa43a3ef07e03ec6b2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,7 +107,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.0625, y: 2.71875}
+    oldSize: {x: 1.96875, y: 1.59375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,7 +157,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 5.5873265
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -245,12 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98eb421f6c30ff84692cb088da8891af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 3
+  <CurrentHealth>k__BackingField: 50
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6213595567998338359}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+      - m_Target: {fileID: 5833717129145593152}
+        m_TargetAssemblyTypeName: Boss, Assembly-CSharp
         m_MethodName: Death
         m_Mode: 1
         m_Arguments:
@@ -288,9 +288,9 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6213595567998338359}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: GetHitFeedBack
+      - m_Target: {fileID: 5833717129145593152}
+        m_TargetAssemblyTypeName: Boss, Assembly-CSharp
+        m_MethodName: BossKilledOutsideBounds
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -324,7 +324,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6213595567998338359
+--- !u!114 &5833717129145593152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,17 +333,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6213595567998338355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6354a0ce18de1c74f89eb2bc8422426d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9440950b0fd3823438004c08fb3e1078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  initialHealthValue: 3
+  initialHealthValue: 500
   projectile: {fileID: 7346062771074515281, guid: 43382fb60acb52f44a058896f62e5259, type: 3}
-  shootingDelay: 2
+  shootingDelay: 1
   isShooting: 0
-  speed: 1
-  speedVariation: 0.3
-  enemySpawner: {fileID: 0}
+  speed: 0.3
+  speedVariation: 0.2
+  bossSpawner: {fileID: 0}
   health: {fileID: 0}
 --- !u!1001 &5750274549011898669
 PrefabInstance:

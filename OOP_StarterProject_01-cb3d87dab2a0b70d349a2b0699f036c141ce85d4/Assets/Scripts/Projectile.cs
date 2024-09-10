@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public Rigidbody2D rb2d;
     public float deathDelay = 5;
 
-    [SerializeField] private int initialHealth = 1;
+    [SerializeField] private int initialHealth = 5;
     [SerializeField] private Health health;
 
     //public bool disabled = false;
@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = GetComponent<Health>();    
+        health = GetComponent<Health>();
         health.InitializeHealth(initialHealth);
 
         rb2d.velocity = transform.up * speed;
@@ -37,6 +37,7 @@ public class Projectile : MonoBehaviour
         IHittable hittable = collision.GetComponent<IHittable>();
         if (hittable != null)
         {
+           
             hittable.GetHit(1, gameObject);
             health.GetHit(1, gameObject); 
             Destroy(gameObject);

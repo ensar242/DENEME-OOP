@@ -5,7 +5,7 @@ using UnityEngine;
 using PA.HealthSystem;//health sistemi ile ilgili referans
 
 //enemy sýnýfý, düþman karakterinin davranýþlarýný tanýmlar
-public class Enemy : MonoBehaviour, IEnemy
+public class Enemy : MonoBehaviour
 {
     public Player player;//oyuncu karakterine referans
     [SerializeField]
@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour, IEnemy
     // oyun baþladýgýnda çagrýlan fonksiyon
     private void Start()
     {
-        health.InitializeHealth(initialHealthValue);//düþmanýn saglýgýný baþlarýr
+        health.InitializeHealth(initialHealthValue);//düþmanýn saglýgýný baþlatýr
+        
     }
     //her karede çagrýlan fonksiyon
     private void Update()
@@ -65,7 +66,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         rb2d.MovePosition(rb2d.position + Vector2.down * speed * Time.deltaTime);//düþmaný assagý dogru hareket ettirir
     }
-    //belirli bir gecikmesen sonra ateþ eden corotuine
+    //belirli bir gecikmeden sonra ateþ eden corotuine
     private IEnumerator ShootWithDelay(float shootingDelay)
     {
         // ilk ateþte rastgele bir gecikme uygular
@@ -82,6 +83,8 @@ public class Enemy : MonoBehaviour, IEnemy
     //düþman bir nesneyle çarðýþtýgýnda caðrýlýr
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject.name);
+
         //eðer çarpýþan nesne oyuncuysa 
         if (collision.GetComponent<Player>())
         {

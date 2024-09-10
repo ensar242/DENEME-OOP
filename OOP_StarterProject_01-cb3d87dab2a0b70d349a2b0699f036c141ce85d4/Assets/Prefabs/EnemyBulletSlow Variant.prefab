@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5101311667334201221, guid: f816b70780456a34497ab0a5a09dcdb9, type: 3}
+      propertyPath: <CurrentHealth>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7298865871267875930, guid: f816b70780456a34497ab0a5a09dcdb9, type: 3}
       propertyPath: m_RootOrder
       value: 0
