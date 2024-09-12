@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213595567998338355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7161, y: 7.319, z: 0}
-  m_LocalScale: {x: 2.716584, y: 3.3718748, z: 0.5307692}
+  m_LocalPosition: {x: 3.4351, y: 6.8792, z: 0}
+  m_LocalScale: {x: 3.4470735, y: 3.9238508, z: 0.5307692}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3368266197542423642}
@@ -103,7 +103,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.09324354, y: -0.1164037}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -114,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.834836, y: 1}
+  m_Size: {x: 1.010367, y: 1.2328073}
   m_EdgeRadius: 0
 --- !u!50 &-5574738824532766061
 Rigidbody2D:
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98eb421f6c30ff84692cb088da8891af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 50
+  <CurrentHealth>k__BackingField: 300
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  initialHealthValue: 50
+  initialHealthValue: 300
   projectile: {fileID: 7346062771074515281, guid: 43382fb60acb52f44a058896f62e5259, type: 3}
   shootingDelay: 2
   isShooting: 0

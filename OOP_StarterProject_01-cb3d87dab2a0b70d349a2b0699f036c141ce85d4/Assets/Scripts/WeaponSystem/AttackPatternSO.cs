@@ -6,6 +6,9 @@ namespace PA.WeaponSystem
 {
     public abstract class AttackPatternSO : ScriptableObject
     {
+       // public Sprite weaponSprite;
+
+
         [SerializeField] protected float attackdealy = 0.2f;
         public float AttackDelay => attackdealy;
 

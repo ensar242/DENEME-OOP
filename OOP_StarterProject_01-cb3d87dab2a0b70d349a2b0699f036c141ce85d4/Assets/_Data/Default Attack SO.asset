@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Default Attack SO
   m_EditorClassIdentifier: 
   attackdealy: 0.2
-  weaponSFX: {fileID: 8300000, guid: 286649637075013438cfc1b595461b20, type: 3}
   projectile: {fileID: 8735426833441098796, guid: f816b70780456a34497ab0a5a09dcdb9, type: 3}
+  weaponSFX: {fileID: 8300000, guid: 286649637075013438cfc1b595461b20, type: 3}
